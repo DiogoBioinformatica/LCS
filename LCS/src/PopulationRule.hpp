@@ -16,13 +16,14 @@
 
 class PopulationRule {
 public:
-	PopulationRule(const unsigned int);
+	PopulationRule(const unsigned int, const unsigned int);
 	virtual ~PopulationRule();
 	std::vector<char> makeMessage(const unsigned int);
-	void makeRule(const unsigned int total);
+	std::vector<char> makeRule(const unsigned int);
 	void showPopulationRule();
 private:
 	std::vector<Rule> m_rules;
+	unsigned int m_populationsize;
 };
 
 #endif /* POPULATIONRULE_HPP_ */

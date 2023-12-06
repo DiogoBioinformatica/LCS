@@ -7,8 +7,8 @@
 
 #include "Rule.hpp"
 
-Rule::Rule(const Chromosome &t_message, const Chromosome &t_classifier) :
-		Individual(t_message), m_classifier(t_classifier) {
+Rule::Rule(const Chromosome &t_message, const Chromosome &t_rule) :
+		Individual(t_message), m_rule(t_rule) {
 }
 
 Rule::~Rule() {
@@ -18,7 +18,7 @@ Rule::~Rule() {
 void Rule::showRule() {
 	Individual::showIndividual();
 	std::cout << ":";
-	m_classifier.showChromosome();
+	m_rule.showChromosome();
 	std::cout << "" << std::endl;
 }
 

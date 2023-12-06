@@ -17,7 +17,9 @@ public:
 	void showRule();
 private:
 	//Chromosome m_addressbit;
-	Chromosome m_classifier;
+	//Chromosome m_classifier;
+	Chromosome m_rule;
+
 };
 
 #endif /* RULE_HPP_ */

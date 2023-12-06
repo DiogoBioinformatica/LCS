@@ -19,7 +19,7 @@ int main() {
 	const unsigned int populationsize = 10;
 
 	auto populationsample = std::unique_ptr<PopulationRule>(
-							new PopulationRule(messagelength));
+							new PopulationRule(messagelength, populationsize));
 		populationsample->showPopulationRule();
 
 	auto result = std::chrono::high_resolution_clock::now() - start;
