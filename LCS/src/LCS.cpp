@@ -10,26 +10,17 @@
 #include <chrono>
 #include <string>
 
-#include "DataBase.hpp"
-#include "PopulationCodeWord.hpp"
-#include "PopulationSample.hpp"
+#include "PopulationRule.hpp"
 
 int main() {
 	auto start = std::chrono::high_resolution_clock::now();
 
 	const unsigned int messagelength = 3;
+	const unsigned int populationsize = 10;
 
-	auto database = std::unique_ptr<DataBase>(new DataBase());
-
-	auto populationcodeword =
-			std::unique_ptr<PopulationCodeWord>(
-					new PopulationCodeWord(
-							database->DBSearch(
-									"SELECT id, message, labelingCase, labeling FROM codeword WHERE sequence_id=51;")));
-
-	auto populationsample = std::unique_ptr<PopulationSample>(
-						new PopulationSample(messagelength));
-	populationsample->showPopulationSample();
+	auto populationsample = std::unique_ptr<PopulationRule>(
+							new PopulationRule(messagelength));
+		populationsample->showPopulationRule();
 
 	auto result = std::chrono::high_resolution_clock::now() - start;
 	long long microseconds = std::chrono::duration_cast<

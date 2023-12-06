@@ -1,13 +1,13 @@
 /*
- * PopulationSample.cpp
+ * PopulationRule.cpp
  *
- *  Created on: 24 de nov. de 2023
+ *  Created on: 6 de dez. de 2023
  *      Author: uriel
  */
 
-#include "PopulationSample.hpp"
+#include "PopulationRule.hpp"
 
-PopulationSample::PopulationSample(const unsigned int t_messagelength) {
+PopulationRule::PopulationRule(const unsigned int t_messagelength) {
 	srand((unsigned int) time(0));
 	const unsigned int total = pow(2, t_messagelength) - 1;
 	std::cout << "total " << total + 1 << std::endl;
@@ -21,15 +21,15 @@ PopulationSample::PopulationSample(const unsigned int t_messagelength) {
 		std::vector<char> classifier;
 		classifier.push_back(message[i]);
 		chrclassifier.setChromosome(classifier);
-		m_instances.push_back(Instance(chrmessage, chrclassifier));
+		m_rules.push_back(Rule(chrmessage, chrclassifier));
 	}
 }
 
-PopulationSample::~PopulationSample() {
+PopulationRule::~PopulationRule() {
 
 }
 
-std::vector<char> PopulationSample::makeMessage(const unsigned int total) {
+std::vector<char> PopulationRule::makeMessage(const unsigned int total) {
 	std::vector<char> message(total);
 	for (unsigned int i = 0; i != total; ++i) {
 		unsigned int seed = rand() % 4;
@@ -40,7 +40,7 @@ std::vector<char> PopulationSample::makeMessage(const unsigned int total) {
 	return message;
 }
 
-void PopulationSample::makeRule(const unsigned int total) {
+void PopulationRule::makeRule(const unsigned int total) {
 	std::vector<char> message(total);
 	for (unsigned int i = 0; i != total; ++i) {
 		unsigned int seed = rand() % 4;
@@ -50,9 +50,9 @@ void PopulationSample::makeRule(const unsigned int total) {
 	}
 }
 
-void PopulationSample::showPopulationSample() {
-	for (auto &cws : m_instances) {
-		cws.showInstance();
+void PopulationRule::showPopulationRule() {
+	for (auto &cws : m_rules) {
+		cws.showRule();
 	}
 }
 

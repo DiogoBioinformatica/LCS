@@ -12,8 +12,12 @@
 
 class Rule: public Individual {
 public:
-	Rule();
+	Rule(const Chromosome&, const Chromosome&);
 	virtual ~Rule();
+	void showRule();
+private:
+	//Chromosome m_addressbit;
+	Chromosome m_classifier;
 };
 
 #endif /* RULE_HPP_ */
