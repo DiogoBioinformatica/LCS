@@ -17,7 +17,7 @@
 int main() {
 	auto start = std::chrono::high_resolution_clock::now();
 
-	const unsigned int messagelength = 9;
+	const unsigned int messagelength = 3;
 
 	auto database = std::unique_ptr<DataBase>(new DataBase());
 

@@ -19,6 +19,7 @@ public:
 	PopulationSample(const unsigned int);
 	virtual ~PopulationSample();
 	std::vector<char> makeMessage(const unsigned int);
+	void makeRule(const unsigned int total);
 	void showPopulationSample();
 private:
 	std::vector<Instance> m_instances;
