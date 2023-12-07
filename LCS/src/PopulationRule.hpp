@@ -19,7 +19,7 @@ public:
 	PopulationRule(const unsigned int, const unsigned int);
 	virtual ~PopulationRule();
 	std::vector<char> makeMessage(const unsigned int);
-	std::vector<char> makeRule(const unsigned int);
+	void makeRule(const unsigned int);
 	void showPopulationRule();
 private:
 	std::vector<Rule> m_rules;

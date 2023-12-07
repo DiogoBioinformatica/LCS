@@ -24,8 +24,8 @@ PopulationRule::PopulationRule(const unsigned int t_messagelength,
 
 
 		*message = makeMessage(total);
-		auto rule = std::unique_ptr<std::vector<char>>(new std::vector<char>);
-		rule = makeRule(total, *message);
+		//auto rule = std::unique_ptr<std::vector<char>>(new std::vector<char>);
+		makeRule(total);
 
 
 
@@ -54,7 +54,7 @@ std::vector<char> PopulationRule::makeMessage(const unsigned int total) {
 	return message;
 }
 
-std::vector<char> PopulationRule::makeRule(const unsigned int total, const std::vector<char> &t_message) {
+void PopulationRule::makeRule(const unsigned int total) {
 	const unsigned int interval = 1 + rand() % (total - 1);
 	std::cout << "" << std::endl;
 	std::cout << " interval: " << interval << std::endl;
@@ -82,6 +82,32 @@ std::vector<char> PopulationRule::makeRule(const unsigned int total, const std::
 	}
 
 	std::cout << "" << std::endl;
+
+	std::list<unsigned int> locusnew { };
+	std::list<unsigned int>::iterator it;
+	for (unsigned int i = 0; i != total; ++i) {
+			locusnew.push_back(i);
+		}
+
+	std::list<unsigned int> v { };
+
+	//std::sort(locusdelete.begin(), locusdelete.end());
+
+
+	    std::set_difference(locusnew.begin(),
+	    		locusnew.end(),
+	                          locusdelete.begin(),
+	                          locusdelete.end(),
+							  std::back_inserter(v));
+
+	    //std::set_difference(x.begin(), x.end(), y.begin(), y.end(), );
+
+	    std::cout << "locus: " << std::endl;
+
+	    	for (auto &ind: v) {
+	    		std::cout << ind << " ";
+
+	    	}
 
 	//std::vector<char> message(total);
 	/*for (unsigned int i = 0; i != total; ++i) {
