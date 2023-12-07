@@ -1,7 +1,7 @@
 /*
  * Individual.hpp
  *
- *  Created on: 24 de nov. de 2023
+ *  Created on: 7 de dez. de 2023
  *      Author: uriel
  */
 
@@ -9,6 +9,8 @@
 #define INDIVIDUAL_HPP_
 
 #include "Chromosome.hpp"
+
+namespace XCS {
 
 class Individual {
 public:
@@ -19,5 +21,7 @@ public:
 protected:
 	Chromosome m_chromosome;
 };
+
+}
 
 #endif /* INDIVIDUAL_HPP_ */

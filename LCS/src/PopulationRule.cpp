@@ -7,7 +7,7 @@
 
 #include "PopulationRule.hpp"
 
-PopulationRule::PopulationRule(const unsigned int t_messagelength,
+XCS::PopulationRule::PopulationRule(const unsigned int t_messagelength,
 		const unsigned int t_populationsize) {
 	m_populationsize = t_populationsize;
 
@@ -17,33 +17,26 @@ PopulationRule::PopulationRule(const unsigned int t_messagelength,
 
 	for (unsigned int i = 0; i != total; ++i) {
 		Chromosome chrmessage = Chromosome(total);
-		//std::vector<char> message;
+		std::vector<char> message;
 
-		auto message = std::unique_ptr<std::vector<char>>(new std::vector<char>);
+		message = makeMessage(total);
+		Chromosome chrrule = Chromosome(total);
+		chrrule = makeRule(total, message);
 
-
-
-		*message = makeMessage(total);
-		//auto rule = std::unique_ptr<std::vector<char>>(new std::vector<char>);
-		makeRule(total);
-
-
-
-
-		/*chrmessage.setChromosome(message);
-		 Chromosome chrclassifier = Chromosome(1);
-		 std::vector<char> classifier;
-		 classifier.push_back(message[i]);
-		 chrclassifier.setChromosome(classifier);
-		 m_rules.push_back(Rule(chrmessage, chrclassifier));*/
+		chrmessage.setChromosome(message);
+		Chromosome chrclassifier = Chromosome(1);
+		std::vector<char> classifier;
+		classifier.push_back(message[i]);
+		chrclassifier.setChromosome(classifier);
+		m_rules.push_back(Rule(chrmessage, chrrule, chrclassifier));
 	}
 }
 
-PopulationRule::~PopulationRule() {
+XCS::PopulationRule::~PopulationRule() {
 
 }
 
-std::vector<char> PopulationRule::makeMessage(const unsigned int total) {
+std::vector<char> XCS::PopulationRule::makeMessage(const unsigned int total) {
 	std::vector<char> message(total);
 	for (unsigned int i = 0; i != total; ++i) {
 		unsigned int seed = rand() % 2;
@@ -54,73 +47,45 @@ std::vector<char> PopulationRule::makeMessage(const unsigned int total) {
 	return message;
 }
 
-void PopulationRule::makeRule(const unsigned int total) {
+const XCS::Chromosome XCS::PopulationRule::makeRule(const unsigned int total,
+		const std::vector<char> &t_message) {
 	const unsigned int interval = 1 + rand() % (total - 1);
-	std::cout << "" << std::endl;
-	std::cout << " interval: " << interval << std::endl;
 
 	std::list<unsigned int> locusdelete { };
 
 	for (unsigned int i = 0; i != interval; ++i) {
 		const unsigned int seed = 1 + rand() % (total - 1);
-		std::cout << "\tseed: " << seed << std::endl;
-
 		auto it = boost::find(locusdelete, seed);
 		if (it == locusdelete.end()) {
 			locusdelete.push_back(seed);
 		} else {
 			--i;
 		}
-
 	}
-
-	std::cout << "" << std::endl;
-
-	for (auto &ind: locusdelete) {
-		std::cout << ind << " ";
-
-	}
-
-	std::cout << "" << std::endl;
+	locusdelete.sort();
 
 	std::list<unsigned int> locusnew { };
 	std::list<unsigned int>::iterator it;
 	for (unsigned int i = 0; i != total; ++i) {
-			locusnew.push_back(i);
-		}
+		locusnew.push_back(i);
+	}
 
-	std::list<unsigned int> v { };
+	std::list<unsigned int> locusresult { };
+	std::set_difference(locusnew.begin(), locusnew.end(), locusdelete.begin(),
+			locusdelete.end(), std::back_inserter(locusresult));
 
-	//std::sort(locusdelete.begin(), locusdelete.end());
+	std::vector<char> rule;
+	for (auto &ind : locusresult) {
+		rule.push_back(t_message[ind]);
+	}
 
+	Chromosome chrrule = Chromosome(total);
+	chrrule.setChromosome(rule, locusresult);
 
-	    std::set_difference(locusnew.begin(),
-	    		locusnew.end(),
-	                          locusdelete.begin(),
-	                          locusdelete.end(),
-							  std::back_inserter(v));
-
-	    //std::set_difference(x.begin(), x.end(), y.begin(), y.end(), );
-
-	    std::cout << "locus: " << std::endl;
-
-	    	for (auto &ind: v) {
-	    		std::cout << ind << " ";
-
-	    	}
-
-	//std::vector<char> message(total);
-	/*for (unsigned int i = 0; i != total; ++i) {
-	 unsigned int seed = rand() % 2;
-	 std::string temp = std::to_string(seed);
-	 const char *seedchar = temp.c_str();
-	 message[i] = *seedchar;
-	 }*/
-
-	//return std::list<unsigned int> locusdelete { };
+	return chrrule;
 }
 
-void PopulationRule::showPopulationRule() {
+void XCS::PopulationRule::showPopulationRule() {
 	for (auto &cws : m_rules) {
 		cws.showRule();
 	}

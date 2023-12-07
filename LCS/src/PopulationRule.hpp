@@ -14,16 +14,20 @@
 #include "Chromosome.hpp"
 #include "Rule.hpp"
 
+namespace XCS {
+
 class PopulationRule {
 public:
 	PopulationRule(const unsigned int, const unsigned int);
 	virtual ~PopulationRule();
 	std::vector<char> makeMessage(const unsigned int);
-	void makeRule(const unsigned int);
+	const Chromosome makeRule(const unsigned int, const std::vector<char>&);
 	void showPopulationRule();
 private:
-	std::vector<Rule> m_rules;
+	std::vector<XCS::Rule> m_rules;
 	unsigned int m_populationsize;
 };
+
+}
 
 #endif /* POPULATIONRULE_HPP_ */

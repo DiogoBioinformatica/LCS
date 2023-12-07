@@ -7,18 +7,20 @@
 
 #include "Rule.hpp"
 
-Rule::Rule(const Chromosome &t_message, const Chromosome &t_rule) :
-		Individual(t_message), m_rule(t_rule) {
+XCS::Rule::Rule(const Chromosome &t_message, const Chromosome &t_rule, const Chromosome &t_addressbit) :
+		Individual(t_message), m_rule(t_rule), m_addressbit(t_addressbit) {
 }
 
-Rule::~Rule() {
+XCS::Rule::~Rule() {
 
 }
 
-void Rule::showRule() {
+void XCS::Rule::showRule() {
 	Individual::showIndividual();
-	std::cout << ":";
+	std::cout << " -> ";
 	m_rule.showChromosome();
+	std::cout << ":";
+	m_addressbit.showChromosome();
 	std::cout << "" << std::endl;
 }
 
