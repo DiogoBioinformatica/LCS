@@ -15,7 +15,7 @@
 int main() {
 	auto start = std::chrono::high_resolution_clock::now();
 
-	const unsigned int messagelength = 15;
+	const unsigned int messagelength = 4;
 	const unsigned int populationsize = 10;
 
 	auto populationsample = std::unique_ptr<XCS::PopulationRule>(

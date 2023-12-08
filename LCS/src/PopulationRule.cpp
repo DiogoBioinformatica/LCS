@@ -15,6 +15,10 @@ XCS::PopulationRule::PopulationRule(const unsigned int t_messagelength,
 	const unsigned int total = pow(2, t_messagelength) - 1;
 	std::cout << "total " << total + 1 << std::endl;
 
+//#pragma omp parallel num_threads(20)
+   //{
+
+
 	for (unsigned int i = 0; i != total; ++i) {
 		Chromosome chrmessage = Chromosome(total);
 		std::vector<char> message;
@@ -30,6 +34,7 @@ XCS::PopulationRule::PopulationRule(const unsigned int t_messagelength,
 		chrclassifier.setChromosome(classifier);
 		m_rules.push_back(Rule(chrmessage, chrrule, chrclassifier));
 	}
+   //}
 }
 
 XCS::PopulationRule::~PopulationRule() {
@@ -38,6 +43,7 @@ XCS::PopulationRule::~PopulationRule() {
 
 std::vector<char> XCS::PopulationRule::makeMessage(const unsigned int total) {
 	std::vector<char> message(total);
+
 	for (unsigned int i = 0; i != total; ++i) {
 		unsigned int seed = rand() % 2;
 		std::string temp = std::to_string(seed);
@@ -53,6 +59,7 @@ const XCS::Chromosome XCS::PopulationRule::makeRule(const unsigned int total,
 
 	std::list<unsigned int> locusdelete { };
 
+
 	for (unsigned int i = 0; i != interval; ++i) {
 		const unsigned int seed = 1 + rand() % (total - 1);
 		auto it = boost::find(locusdelete, seed);
@@ -66,6 +73,8 @@ const XCS::Chromosome XCS::PopulationRule::makeRule(const unsigned int total,
 
 	std::list<unsigned int> locusnew { };
 	std::list<unsigned int>::iterator it;
+
+
 	for (unsigned int i = 0; i != total; ++i) {
 		locusnew.push_back(i);
 	}
