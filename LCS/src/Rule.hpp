@@ -14,13 +14,12 @@ namespace XCS {
 
 class Rule: public Individual {
 public:
-	Rule(const Chromosome&, const Chromosome&, const Chromosome&);
+	Rule(const Chromosome&, const Chromosome&, const Chromosome&, const Chromosome&);
 	virtual ~Rule();
 	void showRule();
 private:
-	Chromosome m_addressbit;
-	//Chromosome m_classifier;
-	Chromosome m_rule;
+	Chromosome m_messagerule;
+	Chromosome m_classifierrule;
 
 };
 

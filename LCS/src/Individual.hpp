@@ -14,12 +14,14 @@ namespace XCS {
 
 class Individual {
 public:
-	Individual(const Chromosome&);
+	Individual(const Chromosome&, const Chromosome&);
+	//(const XCS::Chromosome&, const XCS::Chromosome&);
 	virtual ~Individual();
 	void showIndividual();
 
 protected:
-	Chromosome m_chromosome;
+	Chromosome m_message;
+	Chromosome m_classifier;
 };
 
 }

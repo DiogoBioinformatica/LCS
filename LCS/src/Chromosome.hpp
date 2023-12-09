@@ -26,7 +26,7 @@ public:
 private:
 	std::vector<char> m_gene { };
 	std::list<unsigned int> m_locus { };
-	unsigned int m_messagelength { };
+	unsigned int m_messagesize { };
 };
 
 }

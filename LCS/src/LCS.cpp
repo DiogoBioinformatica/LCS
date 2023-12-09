@@ -15,12 +15,25 @@
 int main() {
 	auto start = std::chrono::high_resolution_clock::now();
 
-	const unsigned int messagelength = 4;
+	const unsigned int messagesize = 4;
 	const unsigned int populationsize = 10;
 
 	auto populationsample = std::unique_ptr<XCS::PopulationRule>(
-							new XCS::PopulationRule(messagelength, populationsize));
-		populationsample->showPopulationRule();
+			new XCS::PopulationRule(populationsize));
+
+	//std::thread thread_obj(&Base::foo, &b, params);
+
+
+	//boost::thread workerThread(populationsample::assemblyRule);
+	populationsample->assemblyRule(messagesize);
+
+
+
+	    //workerThread.join();
+
+
+
+	  populationsample->showPopulationRule();
 
 	auto result = std::chrono::high_resolution_clock::now() - start;
 	long long microseconds = std::chrono::duration_cast<

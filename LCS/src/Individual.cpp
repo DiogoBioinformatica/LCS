@@ -7,8 +7,8 @@
 
 #include "Individual.hpp"
 
-XCS::Individual::Individual(const XCS::Chromosome &t_chromosome) :
-		m_chromosome(t_chromosome) {
+XCS::Individual::Individual(const XCS::Chromosome &t_message, const XCS::Chromosome &t_classifier) :
+m_message(t_message), m_classifier(t_classifier) {
 }
 
 XCS::Individual::~Individual() {
@@ -16,6 +16,7 @@ XCS::Individual::~Individual() {
 }
 
 void XCS::Individual::showIndividual() {
-	m_chromosome.showChromosome();
+	m_message.showChromosome();
+	std::cout << ":";
+	m_classifier.showChromosome();
 }
-

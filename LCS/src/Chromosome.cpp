@@ -7,8 +7,8 @@
 
 #include "Chromosome.hpp"
 
-XCS::Chromosome::Chromosome(const unsigned int t_messagelength) :
-		m_messagelength(t_messagelength) {
+XCS::Chromosome::Chromosome(const unsigned int t_messagesize) :
+		m_messagesize(t_messagesize) {
 }
 
 XCS::Chromosome::~Chromosome() {
@@ -32,7 +32,7 @@ void XCS::Chromosome::setChromosome(const std::vector<char> &t_gene,
 
 void XCS::Chromosome::showChromosome() {
 	unsigned int ind = 0;
-	for (unsigned int i = 0; i != m_messagelength; ++i) {
+	for (unsigned int i = 0; i != m_messagesize; ++i) {
 		auto it = boost::find(m_locus, i);
 		if (it != m_locus.end()) {
 			std::cout << m_gene[ind++];
@@ -41,10 +41,10 @@ void XCS::Chromosome::showChromosome() {
 		}
 	}
 
-	std::cout << " (";
+	/*std::cout << " (";
 	for (auto &ind : m_locus) {
 		std::cout << " " << ind;
 	}
-	std::cout << ")";
+	std::cout << ")";*/
 }
 
