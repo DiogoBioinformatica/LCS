@@ -18,15 +18,16 @@ namespace XCS {
 
 class PopulationRule {
 public:
-	PopulationRule(const unsigned int);
+	PopulationRule(const unsigned int, const unsigned int);
 	virtual ~PopulationRule();
-	void assemblyRule(const unsigned int);
-	std::vector<char> makeMessage(const unsigned int);
-	const Chromosome makeRule(const unsigned int, const std::vector<char>&);
+	void assemblyRule();
+	std::vector<char> makeMessage();
+	const Chromosome makeRule(const std::vector<char>&);
 	void showPopulationRule();
 private:
 	std::vector<XCS::Rule> m_rules;
 	unsigned int m_populationsize;
+	unsigned int m_messagesize;
 };
 
 }

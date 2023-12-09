@@ -7,26 +7,28 @@
 
 #include "PopulationRule.hpp"
 
-XCS::PopulationRule::PopulationRule(const unsigned int t_populationsize) {
+XCS::PopulationRule::PopulationRule(const unsigned int t_populationsize, const unsigned int t_messagesize) {
 	m_populationsize = t_populationsize;
+	m_messagesize = pow(2, t_messagesize) - 1;
+	std::cout << "total " << m_messagesize + 1 << std::endl;
 }
 
 XCS::PopulationRule::~PopulationRule() {
 
 }
 
-void XCS::PopulationRule::assemblyRule(const unsigned int t_messagelength) {
+void XCS::PopulationRule::assemblyRule() {
 
 	srand((unsigned int) time(0));
-	const unsigned int total = pow(2, t_messagelength) - 1;
-	std::cout << "total " << total + 1 << std::endl;
-	for (unsigned int i = 0; i != total; ++i) {
-		Chromosome chrmessage = Chromosome(total);
+
+
+	for (unsigned int i = 0; i != m_populationsize; ++i) {
+		Chromosome chrmessage = Chromosome(m_messagesize);
 		std::vector<char> message;
 
-		message = makeMessage(total);
-		Chromosome chrrule = Chromosome(total);
-		chrrule = makeRule(total, message);
+		message = makeMessage();
+		Chromosome chrrule = Chromosome(m_messagesize);
+		chrrule = makeRule(message);
 
 		chrmessage.setChromosome(message);
 		Chromosome chrclassifier = Chromosome(1);
@@ -37,10 +39,10 @@ void XCS::PopulationRule::assemblyRule(const unsigned int t_messagelength) {
 	}
 }
 
-std::vector<char> XCS::PopulationRule::makeMessage(const unsigned int total) {
-	std::vector<char> message(total);
+std::vector<char> XCS::PopulationRule::makeMessage() {
+	std::vector<char> message(m_messagesize);
 
-	for (unsigned int i = 0; i != total; ++i) {
+	for (unsigned int i = 0; i != m_messagesize; ++i) {
 		unsigned int seed = rand() % 2;
 		std::string temp = std::to_string(seed);
 		const char *seedchar = temp.c_str();
@@ -49,14 +51,13 @@ std::vector<char> XCS::PopulationRule::makeMessage(const unsigned int total) {
 	return message;
 }
 
-const XCS::Chromosome XCS::PopulationRule::makeRule(const unsigned int total,
-		const std::vector<char> &t_message) {
-	const unsigned int interval = 1 + rand() % (total - 1);
+const XCS::Chromosome XCS::PopulationRule::makeRule(const std::vector<char> &t_message) {
+	const unsigned int interval = 1 + rand() % (m_messagesize - 1);
 
 	std::list<unsigned int> locusdelete { };
 
 	for (unsigned int i = 0; i != interval; ++i) {
-		const unsigned int seed = 1 + rand() % (total - 1);
+		const unsigned int seed = 1 + rand() % (m_messagesize - 1);
 		auto it = boost::find(locusdelete, seed);
 		if (it == locusdelete.end()) {
 			locusdelete.push_back(seed);
@@ -69,7 +70,7 @@ const XCS::Chromosome XCS::PopulationRule::makeRule(const unsigned int total,
 	std::list<unsigned int> locusnew { };
 	std::list<unsigned int>::iterator it;
 
-	for (unsigned int i = 0; i != total; ++i) {
+	for (unsigned int i = 0; i != m_messagesize; ++i) {
 		locusnew.push_back(i);
 	}
 
@@ -82,7 +83,7 @@ const XCS::Chromosome XCS::PopulationRule::makeRule(const unsigned int total,
 		rule.push_back(t_message[ind]);
 	}
 
-	Chromosome chrrule = Chromosome(total);
+	Chromosome chrrule = Chromosome(m_messagesize);
 	chrrule.setChromosome(rule, locusresult);
 
 	return chrrule;
