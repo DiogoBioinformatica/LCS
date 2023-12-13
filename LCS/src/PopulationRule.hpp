@@ -22,7 +22,7 @@ public:
 	virtual ~PopulationRule();
 	void assemblyRule();
 	std::vector<char> makeMessage();
-	const Chromosome makeRule(const std::vector<char>&);
+	const Chromosome makeRule(const std::vector<char>&, const std::vector<char>&);
 	void showPopulationRule();
 private:
 	std::vector<XCS::Rule> m_rules;

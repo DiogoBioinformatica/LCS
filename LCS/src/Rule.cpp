@@ -7,12 +7,18 @@
 
 #include "Rule.hpp"
 
-XCS::Rule::Rule(const Chromosome &t_message, const Chromosome &t_classifier, const Chromosome &t_messagerule, const Chromosome &t_classifierrule) :
-		Individual(t_message, t_classifier), m_messagerule(t_messagerule), m_classifierrule(t_classifierrule) {
+XCS::Rule::Rule(const Chromosome &t_message, const Chromosome &t_classifier) :
+		Individual(t_message, t_classifier) {
 }
 
 XCS::Rule::~Rule() {
 
+}
+
+
+void XCS::Rule::setRule(const Chromosome &t_messagerule, const Chromosome &t_classifierrule) {
+		 m_messagerule = t_messagerule;
+		 m_classifierrule = t_classifierrule;
 }
 
 void XCS::Rule::showRule() {
