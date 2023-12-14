@@ -1,20 +1,23 @@
 /*
  * Individual.cpp
  *
- *  Created on: 24 de nov. de 2023
+ *  Created on: 7 de dez. de 2023
  *      Author: uriel
  */
 
 #include "Individual.hpp"
 
-Individual::Individual(const Chromosome &t_chromosome) :
-		m_chromosome(t_chromosome) {
+XCS::Individual::Individual(const Chromosome &t_message,
+		const Chromosome &t_classifier) :
+		m_message(t_message), m_classifier(t_classifier) {
 }
 
-Individual::~Individual() {
+XCS::Individual::~Individual() {
 
 }
 
-void Individual::showIndividual() {
-	m_chromosome.showChromosome();
+void XCS::Individual::showIndividual() {
+	m_message.showChromosome();
+	std::cout << ":";
+	m_classifier.showChromosome();
 }

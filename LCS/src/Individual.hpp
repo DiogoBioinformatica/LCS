@@ -1,7 +1,7 @@
 /*
  * Individual.hpp
  *
- *  Created on: 24 de nov. de 2023
+ *  Created on: 7 de dez. de 2023
  *      Author: uriel
  */
 
@@ -10,14 +10,19 @@
 
 #include "Chromosome.hpp"
 
+namespace XCS {
+
 class Individual {
 public:
-	Individual(const Chromosome&);
+	Individual(const Chromosome&, const Chromosome&);
 	virtual ~Individual();
 	void showIndividual();
 
 protected:
-	Chromosome m_chromosome;
+	Chromosome m_message;
+	Chromosome m_classifier;
 };
+
+}
 
 #endif /* INDIVIDUAL_HPP_ */
