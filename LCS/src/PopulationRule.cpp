@@ -19,9 +19,7 @@ XCS::PopulationRule::~PopulationRule() {
 }
 
 void XCS::PopulationRule::assemblyRule() {
-
 	srand((unsigned int) time(0));
-
 	for (unsigned int i = 0; i != m_populationsize; ++i) {
 		Chromosome chrmessage = Chromosome(m_messagesize);
 		std::vector<char> message;
@@ -37,8 +35,7 @@ void XCS::PopulationRule::assemblyRule() {
 		Chromosome chrrule = Chromosome(m_messagesize);
 		chrrule = makeRule(message, classifier);
 
-		/*m_rules.push_back(
-				Rule(chrmessage, chrclassifier, chrrule, chrclassifier));*/
+		m_rules.push_back(Rule(chrmessage, chrclassifier));
 	}
 }
 

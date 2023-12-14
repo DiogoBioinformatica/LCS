@@ -15,7 +15,6 @@ namespace XCS {
 class Individual {
 public:
 	Individual(const Chromosome&, const Chromosome&);
-	//(const XCS::Chromosome&, const XCS::Chromosome&);
 	virtual ~Individual();
 	void showIndividual();
 
